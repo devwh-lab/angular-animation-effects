@@ -1,33 +1,35 @@
-html {
-  scrollbar-gutter: stable overlay; // prevents layout shift
-}
+import { Directive, ElementRef, Renderer2 } from '@angular/core';
 
-/* Base scrollbar styles */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
+@Directive({
+  selector: '[fgbShimmerLoader]',
+})
+export class ShimmerLoaderDirective {
+  constructor(private el: ElementRef, private renderer: Renderer2) {
+    this.applyShimmerEffect();
+  }
 
-/* Track - transparent so it overlays content */
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-/* Thumb - rounded and semi-transparent */
-::-webkit-scrollbar-thumb {
-  background-color: rgba(100, 100, 100, 0.5);
-  border-radius: 4px;
-  transition: background-color 0.3s ease, opacity 0.3s ease;
-  opacity: 0; // hidden by default
-}
-
-/* Hovering or scrolling state */
-html.scrolling ::-webkit-scrollbar-thumb {
-  opacity: 1; // visible when scrolling
-  background-color: rgba(100, 100, 100, 0.7);
-}
-
-/* Optional hover */
-::-webkit-scrollbar-thumb:hover {
-  background-color: $primary-color;
+  applyShimmerEffect() {
+    this.renderer.setStyle(this.el.nativeElement, 'background', '#f6f7f8');
+    this.renderer.setStyle(
+      this.el.nativeElement,
+      'background',
+      `linear-gradient(
+      90deg,
+      #f6f7f8 25%,
+      #edeef1 50%,
+      #f6f7f8 75%
+    )`
+    );
+    this.renderer.setStyle(
+      this.el.nativeElement,
+      'background-size',
+      '200% 100%'
+    );
+    this.renderer.setStyle(
+      this.el.nativeElement,
+      'animation',
+      'shimmer 1.5s infinite'
+    );
+    this.renderer.setStyle(this.el.nativeElement, 'border-radius', '4px');
+  }
 }
