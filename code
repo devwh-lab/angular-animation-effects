@@ -1,17 +1,33 @@
-/* Webkit Scrollbar */
+html {
+  scrollbar-gutter: stable overlay; // prevents layout shift
+}
+
+/* Base scrollbar styles */
 ::-webkit-scrollbar {
-  width: 4px; /* Width of the scrollbar */
-  height: 4px;
+  width: 8px;
+  height: 8px;
 }
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #888; /* Color of the scrollbar */
-}
-/* Track */
+
+/* Track - transparent so it overlays content */
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: transparent;
 }
-/* Handle on hover */
+
+/* Thumb - rounded and semi-transparent */
+::-webkit-scrollbar-thumb {
+  background-color: rgba(100, 100, 100, 0.5);
+  border-radius: 4px;
+  transition: background-color 0.3s ease, opacity 0.3s ease;
+  opacity: 0; // hidden by default
+}
+
+/* Hovering or scrolling state */
+html.scrolling ::-webkit-scrollbar-thumb {
+  opacity: 1; // visible when scrolling
+  background-color: rgba(100, 100, 100, 0.7);
+}
+
+/* Optional hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: $primary-color;
+  background-color: $primary-color;
 }
