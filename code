@@ -33,3 +33,26 @@ export class ShimmerLoaderDirective {
     this.renderer.setStyle(this.el.nativeElement, 'border-radius', '4px');
   }
 }
+
+
+-- 
+
+/* Custom scroll bar */
+.custom-scroll-bar {
+  /* width */
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: $primary-color;
+  }
+}
